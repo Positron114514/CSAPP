@@ -22,6 +22,8 @@ Commands can be divided into several types, including:
 
 Mostly, the ans is saved in the last reg.
 
+Imm number: `$<number>`. Example: `mov $4, %rax`
+
 ### 2.1  information access
 
 - `mov <src> <dest>` : move the value of `<src> `to `<dest>`
@@ -60,7 +62,24 @@ This command is used by gcc to solve some complex calculates because `leaq` foll
 
 #### 2.2.3 shift operations
 
-- `sal k, D`: D = D >> k
+- `sal k, D`: D = D << k
 - `shl k, D`: D = D << k
 - `sar k, D`: D = D >> k
 - `shr k, D`: D = D >>> k
+
+#### 2.2.4 special operations
+
+x86-64 supports mult of two 64-bit number, which creates an 128-bit number.
+
+the result will be saved in `%rax : %rdx`
+
+- `imulq S`: S * R[%rax] (signed)
+- `mulq S`: S * R[%rax] (unsigned)
+- `clto`: %rax -> 128-bit (symbol expanshion)
+- `idivq S`: signed div. %rax: quotient; %rdx: remainder
+- `divq S`: unsigned div
+
+%rax: low; %rdx: high
+
+## 2.3 Control
+
